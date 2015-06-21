@@ -1,9 +1,7 @@
 ---
 title: "Code Book - Course Project"
-author: "Samira Ouaaz"
-date: "Sunday, June 21, 2015"
-output: html_document
 ---
+
 This is a code book that describes the variables, data, and transformations performed to clean up the data.
 
 

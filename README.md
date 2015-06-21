@@ -1,9 +1,7 @@
 ---
 title: "Getting and Cleaning Data - Course Project"
-author: "Samira Ouaaz"
-date: "Sunday, June 21, 2015"
-output: html_document
 ---
+
 ## Requirements
 1. Merges the training and the test sets to create one data set.
 2. Extracts only the measurements on the mean and standard deviation for each measurement.
@@ -18,10 +16,11 @@ https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Datas
 * CodeBook.md : details about raw data set and tidy data set
 * README.md : this file
 * run_analysis.R : R script to transform raw data into tidy data
+* results : folder containing the generated **tidy_dataset.txt** file
 
 ## How To
 * Clone this repository
 * Download compressed raw data
-* Unzip raw data and copy the directory 'UCI HAR Dataset' to the cloned repository root directory
+* Unzip raw data and copy the directory **UCI HAR Dataset** to the repository root directory
 * Open an R console and set the working directory to the repository root
 * Run run_analysis.R script : the tidy data set will be created in the results folder.

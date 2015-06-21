@@ -4,10 +4,11 @@ require(plyr)
 datafolder <- "UCI HAR Dataset"
 # Results folder will contain output file
 resultsfolder <- "results"
+fileNameResult <- "tidy_dataset"
+fileNameResultExtension <- ".txt"
 
 if(!file.exists(datafolder)){
-    print("Unzipping the data file in the current folder")
-    unzip(file, list = FALSE, overwrite = TRUE)
+    stop("No folder for raw data sets.")
 } 
 
 if(!file.exists(resultsfolder)){
@@ -45,27 +46,26 @@ feature_labels<-read.table(file.path(inputpath,
 #1.Merge the training and the test sets to create one data set.
 train_data<-cbind(cbind(x_train, subject_train), y_train)
 test_data<-cbind(cbind(x_test, subject_test), y_test)
-sensor_data<-rbind(train_data, test_data)
+data<-rbind(train_data, test_data)
 
-sensor_labels<-rbind(rbind(feature_labels, c(562, "Subject")), c(563, "Id"))[,2]
-names(sensor_data)<-sensor_labels
+data_labels<-rbind(rbind(feature_labels, c(562, "Subject")), c(563, "Id"))[,2]
+names(data)<-data_labels
 
 #2. Extract only the measurements on the mean and standard deviation for each measurement.
-sensor_data_mean_std <- sensor_data[,grepl("mean\\(\\)|std\\(\\)|Subject|Id", names(sensor_data))]
+data_mean_std <- data[,grepl("mean\\(\\)|std\\(\\)|Subject|Id", names(data), perl=TRUE, ignore.case=TRUE)]
 
 #3. Use descriptive activity names to name the activities in the data set
-sensor_data_mean_std <- join(sensor_data_mean_std, activity_labels, by = "Id", match = "first")
-sensor_data_mean_std <- sensor_data_mean_std[,-1]
+data_mean_std <- join(data_mean_std, activity_labels, by = "Id", match = "first")
+data_mean_std <- data_mean_std[,-1]
 
 #4. Appropriately label the data set with descriptive names.
-names(sensor_data_mean_std) <- gsub("([()])","",names(sensor_data_mean_std))
-#norm names
-names(sensor_data_mean_std) <- make.names(names(sensor_data_mean_std))
+names(data_mean_std) <- gsub("([()])","",names(data_mean_std))
+names(data_mean_std) <- make.names(names(data_mean_std))
 
 #5. From the data set in step 4, create a second, independent tidy data set 
 # with the average of each variable for each activity and each subject 
-finaldata<-ddply(sensor_data_mean_std, c("Subject","Activity"), numcolwise(mean))
-#Prepare the fiename
-file <- paste(resultsfolder, "/", "tidy_dataset",".txt" ,sep="")
+tidydata<-ddply(data_mean_std, c("Subject","Activity"), numcolwise(mean))
+#Prepare the filename
+file <- paste(resultsfolder, "/", fileNameResult, fileNameResultExtension, sep="")
 #Create the tidy data set file in results folder
-write.table(finaldata, file , row.name=FALSE)
+write.table(tidydata, file , row.name=FALSE)
