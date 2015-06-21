@@ -1,6 +1,4 @@
----
-title: "Code Book - Course Project"
----
+#Code Book - Course Project
 
 This is a code book that describes the variables, data, and transformations performed to clean up the data.
 
