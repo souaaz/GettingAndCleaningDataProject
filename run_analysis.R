@@ -6,12 +6,12 @@ datafolder <- "UCI HAR Dataset"
 resultsfolder <- "results"
 
 if(!file.exists(datafolder)){
-    print("Please unzip the data file")
+    print("Unzipping the data file in the current folder")
     unzip(file, list = FALSE, overwrite = TRUE)
 } 
 
 if(!file.exists(resultsfolder)){
-    print("Please create results folder")
+    print("Creating results folder")
     dir.create(resultsfolder)
 } 
 
