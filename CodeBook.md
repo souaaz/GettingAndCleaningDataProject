@@ -36,6 +36,7 @@ The tidy data set contains :
 **.mean/std**: mean or standard deviation of the measurement
 
 **.X/Y/Z**: one direction of a 3-axial signal
+
 **.mean**: global mean value
 
 The data set is written to the file **tidy_dataset.txt**.
